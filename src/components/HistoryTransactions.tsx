@@ -1,4 +1,5 @@
 import { ChevronLeftSquare, ChevronRightSquare } from "lucide-react";
+import { Transaction } from "./Transaction";
 
 const mockTransactions = [
   { receiver: "Tesco Market", type: "Shopping", Date: "2023-04-21", Amount: "75.60", id: "1" },
@@ -16,8 +17,8 @@ export function HistoryTransactions() {
       </div>
 
       <div className="w-full">
-        <div className="w-full pb-2 grid grid-cols-4 border-b border-primary-text/20">
-          <span className="text-zinc-400 text-sm text-start">Reciever</span>
+        <div className="w-full pb-2 mb-2 grid grid-cols-4 border-b border-primary-text/20">
+          <span className="text-zinc-400 text-sm text-start">Receiver</span>
           <span className="text-zinc-400 text-sm text-start">Type</span>
           <span className="text-zinc-400 text-sm text-start">Date</span>
           <span className="text-zinc-400 text-sm text-start">Amount</span>
@@ -25,12 +26,13 @@ export function HistoryTransactions() {
         <div className="w-full">
           {mockTransactions.map(transaction => {
             return (
-              <div className="w-full grid grid-cols-4 mb-2 p-1 border-b border-primary-text/20" key={transaction.id}>
-                <p className="text-primary-text font-medium text-sm">{transaction.receiver}</p>
-                <p className="text-zinc-400 text-sm ">{transaction.type}</p>
-                <p className="text-zinc-400 text-sm ">{transaction.Date}</p>
-                <p className="text-zinc-600 font-semibold text-sm ">$ {transaction.Amount}</p>
-              </div>
+              <Transaction
+                key={transaction.id}
+                receiver={transaction.receiver}
+                amount={transaction.Amount}
+                type_transaction={transaction.type}
+                date={transaction.Date}
+              />
             );
           })}
         </div>
