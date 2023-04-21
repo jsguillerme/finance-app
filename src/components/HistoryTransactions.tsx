@@ -10,7 +10,7 @@ const mockTransactions = [
 
 export function HistoryTransactions() {
   return (
-    <main className="w-full h-2/4 flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
+    <main className="min-w-full self-start flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
       <div className="mt-3">
         <p className="text-xl font-body font-bold text-secondary-text">Transaction history</p>
       </div>

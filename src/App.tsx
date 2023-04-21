@@ -8,18 +8,18 @@ import { OutcomeStatistics } from "./components/OutcomeStatistics";
 function App() {
   return (
     <div className="w-screen h-screen flex items-center outline-0">
-      <aside className="w-72 mr-5 h-full border-r-2 border-r-zinc-200">
+      <aside className="w-60 mr-5 h-full border-r-2 border-r-zinc-200 max-[960px]:w-16">
         <Header />
       </aside>
 
       <main className="w-full h-full flex-1">
         <NavMain />
-        <section className="w-full h-4/5 grid grid-cols-2 p-2 gap-5 grid-flow-row">
-          <div className="w-full h-full flex flex-col items-center flex-wrap lg:flex-nowrap">
+        <section className="w-full h-4/5 grid grid-cols-2 p-2 gap-5 max-[1670px]:grid-cols-1">
+          <div className="w-full h-full flex flex-col items-center">
             <InfoCard />
             <HistoryTransactions />
           </div>
-          <div>
+          <div className="max-[760px]:flex max-[760px]:flex-col max-[760px]:gap-20">
             <InfoGoals />
             <OutcomeStatistics />
           </div>

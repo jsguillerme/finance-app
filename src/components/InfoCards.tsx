@@ -3,7 +3,7 @@ import { CreditCard } from "./CreditCard";
 
 export function InfoCard() {
   return (
-    <main className="w-full h-2/4 flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
+    <main className="min-w-[720px] self-start h-2/4 flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
       <div>
         <p className="text-xl font-body font-bold text-secondary-text">Cards</p>
       </div>

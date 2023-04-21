@@ -8,8 +8,8 @@ type LinkProps = {
 export function Link(props: LinkProps) {
   return (
     <div className='flex items-center justify-center gap-6'>
-      <p className="text-zinc-400">{props.icon}</p>
-      <a href="#" className="text-zinc-400 font-medium hover:brightness-75">{props.title}</a>
+      <a href="#" className="text-zinc-400 hover:brightness-75">{props.icon}</a>
+      <a href="#" className="text-zinc-400 font-medium hover:brightness-75 max-[960px]:hidden">{props.title}</a>
     </div>
   );
 }
