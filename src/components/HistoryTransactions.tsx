@@ -1,5 +1,6 @@
 import { ChevronLeftSquare, ChevronRightSquare } from "lucide-react";
 import { Transaction } from "./Transaction";
+import { TitleBoard } from "./TitleBoard";
 
 const mockTransactions = [
   { receiver: "Tesco Market", type: "Shopping", Date: "2023-04-21", Amount: "75.60", id: "1" },
@@ -12,9 +13,7 @@ const mockTransactions = [
 export function HistoryTransactions() {
   return (
     <main className="min-w-full self-start flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
-      <div className="mt-3">
-        <p className="text-xl font-body font-bold text-secondary-text">Transaction history</p>
-      </div>
+      <TitleBoard title="Transaction history"/>
 
       <div className="w-full">
         <div className="w-full pb-2 mb-2 grid grid-cols-4 border-b border-primary-text/20">
