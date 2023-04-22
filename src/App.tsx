@@ -4,6 +4,7 @@ import { InfoCards } from "./components/InfoCards";
 import { InfoGoals } from "./components/InfoGoals";
 import { NavMain } from "./components/NavMain";
 import { OutcomeStatistics } from "./components/OutcomeStatistics";
+import { TransactionContextProvider } from "./contexts/TransactionContext";
 
 function App() {
   return (
@@ -13,17 +14,19 @@ function App() {
       </aside>
 
       <main className="w-full flex-1">
-        <NavMain />
-        <section className="w-full grid grid-cols-2 p-2 gap-5 max-[1670px]:grid-cols-1">
-          <div className="w-full flex flex-col items-center">
-            <InfoCards />
-            <HistoryTransactions />
-          </div>
-          <div className="max-[760px]:flex max-[760px]:flex-col max-[760px]:gap-20">
-            <InfoGoals />
-            <OutcomeStatistics />
-          </div>
-        </section>
+        <TransactionContextProvider>
+          <NavMain />
+          <section className="w-full grid grid-cols-2 p-2 gap-5 max-[1670px]:grid-cols-1">
+            <div className="w-full flex flex-col items-center">
+              <InfoCards />
+              <HistoryTransactions />
+            </div>
+            <div className="max-[760px]:flex max-[760px]:flex-col max-[760px]:gap-20">
+              <InfoGoals />
+              <OutcomeStatistics />
+            </div>
+          </section>
+        </TransactionContextProvider>
       </main>
     </div>
   );

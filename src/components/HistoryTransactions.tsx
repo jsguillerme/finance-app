@@ -1,11 +1,12 @@
 import { ChevronLeftSquare, ChevronRightSquare, PlusCircle } from "lucide-react";
 import { TitleBoard } from "./TitleBoard";
 import { Transaction } from "./Transaction";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TransactionClass } from '../helpers/Transactions';
 
 import illustrationIconCredit from '../assets/illustration-credit.svg';
-import { ModalRegister } from "./ModalRegister";
+import { ModalCreateTransaction } from "./Modals/CreateTransaction";
+import { TransactionContext } from "../contexts/TransactionContext";
 
 type HistoryTransactionsProps = {
   id: string;
@@ -17,8 +18,8 @@ type HistoryTransactionsProps = {
 }
 
 export function HistoryTransactions() {
+  const { modalCreateTransaction, openModal } = useContext(TransactionContext)
   const [historyTransactions, setHistoryTransactions] = useState<HistoryTransactionsProps[]>([]);
-  const [modalRegisterTransaction, setModalRegisterTransaction] = useState(false);
 
   const populateHistoryTransactions = async () => {
     const result: any = await TransactionClass.getAllTransactions();
@@ -27,7 +28,7 @@ export function HistoryTransactions() {
 
   useEffect(() => {
     populateHistoryTransactions();
-  }, [])
+  }, [modalCreateTransaction])
 
   return (
     <main
@@ -36,14 +37,14 @@ export function HistoryTransactions() {
       <div className="w-full flex  items-center justify-between">
         <TitleBoard title="Transaction history" />
         <button
-          onClick={() =>setModalRegisterTransaction(true)}
+          onClick={() => openModal()}
         >
           <PlusCircle size={28} className="fill-primary-text hover:brightness-125" color="white" />
         </button>
       </div>
 
-      {modalRegisterTransaction ? <ModalRegister /> : ''}
-      
+      {modalCreateTransaction ? <ModalCreateTransaction /> : ''}
+
       <div className="w-full">
         <div className="w-full pb-2 mb-2 grid grid-cols-4 border-b border-primary-text/20">
           <span className="text-zinc-400 text-sm text-start">Receiver</span>
@@ -57,9 +58,9 @@ export function HistoryTransactions() {
               return (
                 <Transaction
                   key={transaction.id}
-                  receiver={transaction.establishment_name}
-                  amount={transaction.spent_value}
-                  type_transaction={transaction.category_establishment}
+                  establishment_name={transaction.establishment_name}
+                  spent_value={transaction.spent_value}
+                  category_establishment={transaction.category_establishment}
                   date={transaction.created_at}
                 />
               );
