@@ -2,7 +2,7 @@ import { Bell, Mail, User } from "lucide-react";
 
 export function NavMain() {
   return (
-    <div className="flex items-center justify-between w-full h-40">
+    <div className="flex items-center justify-between w-full h-30">
 
       <div className="flex flex-col w-full h-full items-start justify-center px-12">
         <h2 className="text-5xl font-body font-bold text-zinc-800">Olá, Guilherme</h2>
