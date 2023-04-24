@@ -42,7 +42,7 @@ export function ModalCreateTransaction() {
 
   return (
     <div className="fixed top-0 bottom-0 right-0 left-0 bg-black/30 z-[2] shadow-lg bg-blend-overlay">
-      <div className="absolute top-[25%] left-[35%] right-[25%] bg-white z-[3] w-[30%] h-[600px] shadow-2xl rounded-lg">
+      <div className="absolute top-[25%] left-[40%] right-[25%] bg-white z-[3] w-[25%] h-[600px] shadow-2xl rounded-lg">
         <div className="w-full p-8 flex flex-col items-center justify-center">
           <div className="w-full flex items-center justify-between mb-8">
             <h3 className="text-xl text-primary-text font-semibold">Adicionar uma transação</h3>
@@ -53,7 +53,7 @@ export function ModalCreateTransaction() {
               <X size={18} color="red" />
             </button>
           </div>
-          <form className="flex flex-col gap-2">
+          <form className="w-full flex flex-col gap-2">
             <label
               className="text-secondary-text font-medium text-lg"
               htmlFor="establishment_name"
@@ -117,39 +117,41 @@ export function ModalCreateTransaction() {
               <option value="0730ffac-d039-4194-9571-01aa2aa0efbd">Nubank</option>
             </select>
 
-            <label
-              className="text-secondary-text font-medium text-lg"
-            >Tipo de Transição</label>
-            <div className="w-full flex items-center justify-center gap-10">
-              <div className="flex items-center gap-2">
-                <input
-                  value={typeTransaction}
-                  onChange={val => setTypeTransaction(val.target.id)}
-                  className="cursor-pointer"
-                  type="radio"
-                  name="type_transaction"
-                  id="income" />
-                <label
-                  className="text-green-600 font-semibold cursor-pointer"
-                  htmlFor="income"
-                >Entrada</label>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  value={typeTransaction}
-                  onChange={val => setTypeTransaction(val.target.id)}
-                  className="cursor-pointer"
-                  type="radio"
-                  name="type_transaction"
-                  id="outcome" />
-                <label
-                  className="text-red-600 font-semibold cursor-pointer"
-                  htmlFor="outcome"
-                >Saída</label>
+            <div className="w-2/4 flex flex-col gap-3">
+              <label
+                className="text-secondary-text font-medium text-lg"
+              >Tipo de Transição</label>
+              <div className="w-full flex items-center justify-center gap-10">
+                <div className="flex items-center gap-2">
+                  <input
+                    value={typeTransaction}
+                    onChange={val => setTypeTransaction(val.target.id)}
+                    className="cursor-pointer"
+                    type="radio"
+                    name="type_transaction"
+                    id="income" />
+                  <label
+                    className="text-green-600 font-semibold cursor-pointer"
+                    htmlFor="income"
+                  >Entrada</label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    value={typeTransaction}
+                    onChange={val => setTypeTransaction(val.target.id)}
+                    className="cursor-pointer"
+                    type="radio"
+                    name="type_transaction"
+                    id="outcome" />
+                  <label
+                    className="text-red-600 font-semibold cursor-pointer"
+                    htmlFor="outcome"
+                  >Saída</label>
+                </div>
               </div>
             </div>
 
-            <div className="w-full flex justify-between mt-5">
+            <div className="w-full flex justify-start gap-10 mt-5">
               <button
                 onClick={() => closeModal()}
                 className="bg-zinc-400 rounded p-2 text-white hover:brightness-110 transition-all"
@@ -159,7 +161,7 @@ export function ModalCreateTransaction() {
                 className="bg-third-text rounded p-2 text-white hover:brightness-110 transition-all flex items-center gap-1"
               >
                 Adicionar
-                {!ísLoading && <p><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"></animateTransform></path></svg></p>}
+                {ísLoading && <p><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"></animateTransform></path></svg></p>}
               </button>
             </div>
           </form>
