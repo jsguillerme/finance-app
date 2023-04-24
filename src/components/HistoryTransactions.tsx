@@ -5,12 +5,15 @@ import { useContext, useEffect, useState } from "react";
 import { TransactionClass } from '../helpers/Transactions';
 
 import illustrationIconCredit from '../assets/illustration-credit.svg';
+
 import { ModalCreateTransaction } from "./Modals/CreateTransaction";
 import { TransactionContext } from "../contexts/TransactionContext";
+import { CardCreditContext } from "../contexts/CardCreditContext";
 import { ITransaction } from "../interface/ITransaction";
 
 export function HistoryTransactions() {
-  const { modalCreateTransaction, openModal } = useContext(TransactionContext)
+  const { modalCreateTransaction, openModal } = useContext(TransactionContext);
+  const { modalAddCreditCard } = useContext(CardCreditContext);
   const [historyTransactions, setHistoryTransactions] = useState<ITransaction[]>([]);
 
   const populateHistoryTransactions = async () => {
@@ -20,7 +23,7 @@ export function HistoryTransactions() {
 
   useEffect(() => {
     populateHistoryTransactions();
-  }, [modalCreateTransaction])
+  }, [modalCreateTransaction, modalAddCreditCard])
 
   return (
     <main

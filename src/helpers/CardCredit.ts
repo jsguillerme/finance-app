@@ -28,4 +28,15 @@ export class CardCreditClass {
         .catch(reject)
     })
   }
+
+  static CardUpdateNewOutcome(id: string, data: any) {
+    console.log("id: ", id);
+    console.log("data: ", data);
+    return new Promise((resolve, reject) => {
+      axios.put(`http://localhost:9999/card/${id}`, data)
+        .then((res) => res.data)
+        .then(resolve)
+        .catch(reject)
+    })
+  }
 }

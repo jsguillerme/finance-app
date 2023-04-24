@@ -3,6 +3,7 @@ import { FormEvent, useContext, useState } from "react";
 import { TransactionContext } from "../../contexts/TransactionContext";
 import { ITransaction } from "../../interface/ITransaction";
 import { TransactionClass } from "../../helpers/Transactions";
+import { CardCreditClass } from "../../helpers/CardCredit";
 
 export function ModalCreateTransaction() {
   const { closeModal } = useContext(TransactionContext)
@@ -31,7 +32,12 @@ export function ModalCreateTransaction() {
       type_transaction: typeTransaction
     }
 
+    const payloadUpdate = {
+      new_spent: String(spentValue)
+    }
+    
     await TransactionClass.createTransaction(payload);
+    await CardCreditClass.CardUpdateNewOutcome(cardCredit, payloadUpdate)
     setEstablishmentName('');
     setSpentValue(0);
     setCategoryEstablishment('');
@@ -114,7 +120,7 @@ export function ModalCreateTransaction() {
               defaultValue="default"
             >
               <option value="default">Selecione...</option>
-              <option value="0730ffac-d039-4194-9571-01aa2aa0efbd">Nubank</option>
+              <option value="cc4b6b34-b4d1-4901-8919-e9b208204c81">Nubank</option>
             </select>
 
             <div className="w-2/4 flex flex-col gap-3">

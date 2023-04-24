@@ -10,9 +10,12 @@ import { ICreditCard } from "../interface/ICreditCard";
 import { BarProgress } from "./BarProgress";
 import { PercentCalcLimit } from "../utils/PercentCalcLimit";
 import { Loading } from "./Loading";
+import { TransactionContext } from "../contexts/TransactionContext";
 
 export function InfoCards() {
   const { openModal, modalAddCreditCard } = useContext(CardCreditContext);
+  const { modalCreateTransaction } = useContext(TransactionContext);
+
   const [currentCard, setCurrentCard] = useState<ICreditCard>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +28,7 @@ export function InfoCards() {
 
   useEffect(() => {
     populateCreditCards();
-  }, [modalAddCreditCard])
+  }, [modalAddCreditCard, modalCreateTransaction])
 
   return (
     <main className="min-w-[720px] self-start h-2/4 flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
@@ -87,7 +90,7 @@ export function InfoCards() {
           />
           <div className="w-2/3 flex items-center justify-between">
             <p className="text-sm text-zinc-400">Limite de Pagamento</p>
-            <p className="text-sm font-bold text-primary-text/75">{`${currentCard?.outcome_balance || 'R$ 0'} / ${currentCard?.limit_value || 'R$ 0'}`}</p>
+            <p className="text-sm font-bold text-primary-text/75">{`R$ ${currentCard?.outcome_balance || 'R$ 0'} / R$ ${currentCard?.limit_value || 'R$ 0'}`}</p>
           </div>
         </div>
 
