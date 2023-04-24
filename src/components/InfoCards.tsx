@@ -7,15 +7,19 @@ import { AddCreditCard } from "./Modals/AddCreditCard";
 import { InfoBalance } from "./InfoBalance";
 import { CardCreditClass } from "../helpers/CardCredit";
 import { ICreditCard } from "../interface/ICreditCard";
+import { BarProgress } from "./BarProgress";
+import { PercentCalcLimit } from "../utils/PercentCalcLimit";
+import { Loading } from "./Loading";
 
 export function InfoCards() {
   const { openModal, modalAddCreditCard } = useContext(CardCreditContext);
   const [currentCard, setCurrentCard] = useState<ICreditCard>();
-
-  console.log(currentCard)
+  const [isLoading, setIsLoading] = useState(false);
 
   const populateCreditCards = async () => {
+    setIsLoading(true);
     const result = await CardCreditClass.getAllCards();
+    setIsLoading(false);
     setCurrentCard(result[0])
   }
 
@@ -32,45 +36,57 @@ export function InfoCards() {
           <button className="hover:scale-110">
             <ChevronLeft size={26} color="#112A46" />
           </button>
+
           <CreditCard
             number_card={currentCard?.number_card || "XXXX **** **** XXXX"}
             owner_card={currentCard?.owner_card || "EXAMPLE NAME"}
             expired_date={currentCard?.expired_date || "YYYY-MM"}
           />
+
           <button className="hover:scale-110">
             <ChevronRight size={26} color="#112A46" />
           </button>
         </div>
 
         <div className="flex flex-col gap-3 mr-2">
-          <InfoBalance
-            title="Saldo atual"
-            value={currentCard?.current_balance || '0'}
-            size="large"
-            color="blue"
-          />
-          <InfoBalance
-            title="Entrada"
-            value={currentCard?.income_balance || '0'}
-            size="medium"
-            color="green"
-          />
-          <InfoBalance
-            title="Saída"
-            value={currentCard?.outcome_balance || '0'}
-            size="small"
-            color="red"
-          />
+          {isLoading ? (
+            <Loading
+              color="text-primary-text"
+              sizeH={3}
+              sizeW={3}
+            />
+          ) : (
+            <>
+              <InfoBalance
+                title="Saldo atual"
+                value={currentCard?.current_balance || '0'}
+                size="large"
+                color="blue"
+              />
+              <InfoBalance
+                title="Entrada"
+                value={currentCard?.income_balance || '0'}
+                size="medium"
+                color="green"
+              />
+              <InfoBalance
+                title="Saída"
+                value={currentCard?.outcome_balance || '0'}
+                size="small"
+                color="red"
+              />
+            </>
+          )}
         </div>
       </div>
 
       <div className="w-full flex items-center gap-2">
         <div className="w-full flex flex-col gap-2">
-          <div className="w-2/3 h-3 bg-zinc-400 rounded-xl">
-            <p className="w-24 h-3 bg-primary-text/80 rounded-xl"></p>
-          </div>
+          <BarProgress
+            completed={PercentCalcLimit(currentCard?.limit_value || "1", currentCard?.outcome_balance || "1")}
+          />
           <div className="w-2/3 flex items-center justify-between">
-            <p className="text-sm text-zinc-400">Payment limit</p>
+            <p className="text-sm text-zinc-400">Limite de Pagamento</p>
             <p className="text-sm font-bold text-primary-text/75">{`${currentCard?.outcome_balance || 'R$ 0'} / ${currentCard?.limit_value || 'R$ 0'}`}</p>
           </div>
         </div>
