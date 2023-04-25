@@ -1,13 +1,16 @@
 import { ChevronRight, Plus } from "lucide-react";
 import { Goal } from "./Goal";
 import { TitleBoard } from "./TitleBoard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IGoals } from "../interface/IGoals";
 import { GoalsClass } from "../helpers/Goals";
 
 import goalPersonal from '../assets/goal-personal.svg';
+import { GoalContext } from "../contexts/GoalContext";
+import { ModalCreateGoal } from "./Modals/CreateGoal";
 
 export function InfoGoals() {
+  const { openModal, modalCreateGoal } = useContext(GoalContext)
   const [listGoals, setListGoals] = useState<IGoals[]>([])
 
   const populateAllGoals = async () => {
@@ -17,17 +20,21 @@ export function InfoGoals() {
 
   useEffect(() => {
     populateAllGoals();
-  }, [])
+  }, [modalCreateGoal])
 
 
   return (
     <main className="w-full h-2/4 flex flex-col items-start p-4 gap-3">
       <div className="flex items-center gap-2">
         <TitleBoard title="Goals" />
-        <button className="h-5 w-5 rounded-full bg-fifth-text flex items-center justify-center hover:brightness-90 transition-all">
+        <button
+          onClick={openModal}
+          className="h-5 w-5 rounded-full bg-fifth-text flex items-center justify-center hover:brightness-90 transition-all">
           <Plus color="#112A46" />
         </button>
       </div>
+
+      {modalCreateGoal && <ModalCreateGoal />}
 
       <div className="flex items-center gap-2">
         <div className="w-full flex flex-wrap items-center gap-3">
@@ -38,7 +45,7 @@ export function InfoGoals() {
                   key={goal.id}
                   title={goal.title}
                   expected_date={goal.expected_date}
-                  goal_value={goal.predicted_Value}
+                  goal_value={goal.predicted_value}
                 />
               );
             })

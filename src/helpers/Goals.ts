@@ -22,6 +22,7 @@ export class GoalsClass {
   }
 
   static createGoal(data: IGoals): Promise<IGoals> {
+    console.log(data)
     return new Promise((resolve, reject) => {
       axios.post('http://localhost:9999/goal', data)
         .then((res) => res.data)

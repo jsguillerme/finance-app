@@ -20,8 +20,8 @@ export function ModalCreateTransaction() {
 
   const loadAllCardsToSelect = async () => {
     const result = await CardCreditClass.getAllCards();
-    setListCards(result)
-  }
+    setListCards(result);
+  };
 
   useEffect(() => {
     loadAllCardsToSelect()

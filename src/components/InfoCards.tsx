@@ -34,7 +34,7 @@ export function InfoCards() {
     <main className="min-w-[720px] self-start h-2/4 flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
       <div className="flex gap-2 items-center">
         <TitleBoard title="Cartões" />
-        <p>{currentCard?.surname}</p>
+        <p className="mt-2 text-xl font-body font-bold text-secondary-text"> | {currentCard?.surname}</p>
       </div>
 
       <div className="w-full flex flex-wrap md:flex-nowrap items-center justify-between">
