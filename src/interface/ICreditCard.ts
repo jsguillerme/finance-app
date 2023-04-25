@@ -7,4 +7,5 @@ export interface ICreditCard {
   current_balance?: string;
   income_balance?: string;
   outcome_balance?: string;
+  surname: string;
 }

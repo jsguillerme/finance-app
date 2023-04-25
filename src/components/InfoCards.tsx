@@ -32,7 +32,10 @@ export function InfoCards() {
 
   return (
     <main className="min-w-[720px] self-start h-2/4 flex flex-col items-start p-4 gap-3 shadow-lg rounded-3xl">
-      <TitleBoard title="Cartões" />
+      <div className="flex gap-2 items-center">
+        <TitleBoard title="Cartões" />
+        <p>{currentCard?.surname}</p>
+      </div>
 
       <div className="w-full flex flex-wrap md:flex-nowrap items-center justify-between">
         <div className="flex items-center border-zinc-200 border-r">

@@ -1,29 +1,25 @@
 import { ChevronRight, Plus } from "lucide-react";
 import { Goal } from "./Goal";
 import { TitleBoard } from "./TitleBoard";
+import { useEffect, useState } from "react";
+import { IGoals } from "../interface/IGoals";
+import { GoalsClass } from "../helpers/Goals";
 
-const mockGoals = [
-  {
-    id: '1',
-    title: "Buy PS4",
-    expected_date: "2023-02-21",
-    goal_value: 2400
-  },
-  {
-    id: '2',
-    title: "Travel",
-    expected_date: "2024-01-05",
-    goal_value: 6000
-  },
-  {
-    id: '3',
-    title: "Graduation College",
-    expected_date: "2024-12-12",
-    goal_value: 600
-  }
-]
+import goalPersonal from '../assets/goal-personal.svg';
 
 export function InfoGoals() {
+  const [listGoals, setListGoals] = useState<IGoals[]>([])
+
+  const populateAllGoals = async () => {
+    const result = await GoalsClass.listGoalsAll();
+    setListGoals(result)
+  }
+
+  useEffect(() => {
+    populateAllGoals();
+  }, [])
+
+
   return (
     <main className="w-full h-2/4 flex flex-col items-start p-4 gap-3">
       <div className="flex items-center gap-2">
@@ -35,20 +31,32 @@ export function InfoGoals() {
 
       <div className="flex items-center gap-2">
         <div className="w-full flex flex-wrap items-center gap-3">
-          {mockGoals.map(goal => {
-            return (
-              <Goal
-                key={goal.id}
-                title={goal.title}
-                expected_date={goal.expected_date}
-                goal_value={goal.goal_value}
-              />
-            );
-          })}
+          {listGoals.length !== 0 ? (
+            listGoals.map(goal => {
+              return (
+                <Goal
+                  key={goal.id}
+                  title={goal.title}
+                  expected_date={goal.expected_date}
+                  goal_value={goal.predicted_Value}
+                />
+              );
+            })
+          ) : (
+            <div className="flex items-center justify-center">
+              <img
+                title="Crie objetivos"
+                className="h-56 w-56"
+                src={goalPersonal}
+                alt="ilustração de pessoa apontando para objetivos" />
+            </div>
+          )}
+          <button
+            className={`hover:scale-110 transition-all ${listGoals.length === 0 ? 'invisible' : ''}`}
+          >
+            <ChevronRight size={40} color="#112A46" />
+          </button>
         </div>
-        <button className="hover:scale-110 transition-all">
-          <ChevronRight size={40} color="#112A46" />
-        </button>
       </div>
     </main>
   );

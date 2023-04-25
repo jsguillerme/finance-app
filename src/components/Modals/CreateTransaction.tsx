@@ -1,9 +1,10 @@
 import { X } from "lucide-react";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { TransactionContext } from "../../contexts/TransactionContext";
 import { ITransaction } from "../../interface/ITransaction";
 import { TransactionClass } from "../../helpers/Transactions";
 import { CardCreditClass } from "../../helpers/CardCredit";
+import { ICreditCard } from "../../interface/ICreditCard";
 
 export function ModalCreateTransaction() {
   const { closeModal } = useContext(TransactionContext)
@@ -14,6 +15,17 @@ export function ModalCreateTransaction() {
   const [categoryEstablishment, setCategoryEstablishment] = useState('');
   const [cardCredit, setCardCredit] = useState('');
   const [typeTransaction, setTypeTransaction] = useState('');
+
+  const [listCards, setListCards] = useState<ICreditCard[]>([]);
+
+  const loadAllCardsToSelect = async () => {
+    const result = await CardCreditClass.getAllCards();
+    setListCards(result)
+  }
+
+  useEffect(() => {
+    loadAllCardsToSelect()
+  }, [])
 
   async function createTransaction(event: FormEvent) {
     event.preventDefault();
@@ -35,7 +47,7 @@ export function ModalCreateTransaction() {
     const payloadUpdate = {
       new_spent: String(spentValue)
     }
-    
+
     await TransactionClass.createTransaction(payload);
     await CardCreditClass.CardUpdateNewOutcome(cardCredit, payloadUpdate)
     setEstablishmentName('');
@@ -61,7 +73,7 @@ export function ModalCreateTransaction() {
           </div>
           <form className="w-full flex flex-col gap-2">
             <label
-              className="text-secondary-text font-medium text-lg"
+              className="text-secondary-text font-medium text-sm"
               htmlFor="establishment_name"
             >Nome do Estabelecimento</label>
             <input
@@ -74,7 +86,7 @@ export function ModalCreateTransaction() {
             />
 
             <label
-              className="text-secondary-text font-medium text-lg"
+              className="text-secondary-text font-medium text-sm"
               htmlFor="spent_value"
             >Valor</label>
             <input
@@ -88,7 +100,7 @@ export function ModalCreateTransaction() {
             />
 
             <label
-              className="text-secondary-text font-medium text-lg"
+              className="text-secondary-text font-medium text-sm"
               htmlFor="categoryEstablishment"
             >Categoria</label>
             <select
@@ -108,7 +120,7 @@ export function ModalCreateTransaction() {
             </select>
 
             <label
-              className="text-secondary-text font-medium text-lg"
+              className="text-secondary-text font-medium text-sm"
               htmlFor="cardCredit"
             >Cartão Usado</label>
             <select
@@ -120,12 +132,17 @@ export function ModalCreateTransaction() {
               defaultValue="default"
             >
               <option value="default">Selecione...</option>
-              <option value="cc4b6b34-b4d1-4901-8919-e9b208204c81">Nubank</option>
+              {listCards.map((card) => {
+                return <option
+                  key={card.id}
+                  value={card.id}
+                >{card.surname}</option>
+              })}
             </select>
 
             <div className="w-2/4 flex flex-col gap-3">
               <label
-                className="text-secondary-text font-medium text-lg"
+                className="text-secondary-text font-medium text-sm"
               >Tipo de Transição</label>
               <div className="w-full flex items-center justify-center gap-10">
                 <div className="flex items-center gap-2">

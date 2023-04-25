@@ -8,6 +8,7 @@ export function AddCreditCard() {
   const { closeModal } = useContext(CardCreditContext)
   const [ísLoading, setIsLoading] = useState(false);
 
+  const [apelido, setApelido] = useState('');
   const [numberCard, setNumberCard] = useState('');
   const [nameCard, setNameCard] = useState('');
   const [dateExpired, setDateExpired] = useState('');
@@ -18,7 +19,7 @@ export function AddCreditCard() {
     event.preventDefault();
     setIsLoading(true);
 
-    if (numberCard.trim() === '' || nameCard.trim() === '' || dateExpired.trim() === '' || limitCard.trim() === '') {
+    if (numberCard.trim() === '' || nameCard.trim() === '' || dateExpired.trim() === '' || limitCard.trim() === '' || apelido.trim() === '') {
       setIsLoading(false);
       return;
     }
@@ -28,11 +29,13 @@ export function AddCreditCard() {
       expired_date: dateExpired,
       limit_value: limitCard,
       owner_card: nameCard,
+      surname: apelido
     }
 
     try {
 
       await CardCreditClass.createNewCard(payloadCardCredit);
+      
       setDateExpired('');
       setLimitCard('');
       setNameCard('');
@@ -67,10 +70,25 @@ export function AddCreditCard() {
               <X size={18} color="red" />
             </button>
           </div>
-          <form className="w-full flex flex-col gap-4">
+          <form className="w-full flex flex-col gap-3">
+
+            <label
+              className="text-secondary-text font-medium text-sm"
+              htmlFor="cc-apelido"
+            >Apelido para cartão</label>
+            <input
+              className="border rounded-md p-2 text-sm text-primary-text placeholder-primary-text/40"
+              type="text"
+              name="cc-apelido"
+              id="cc-apelido"
+              placeholder="Nubank, Inter..."
+              value={apelido}
+              onChange={val => setApelido(val.target.value)}
+            />
+
             <label
               htmlFor="cc-number"
-              className="text-secondary-text font-medium text-lg"
+              className="text-secondary-text font-medium text-sm"
             >Número do cartão</label>
             <input
               type="tel"
@@ -86,7 +104,7 @@ export function AddCreditCard() {
             />
 
             <label
-              className="text-secondary-text font-medium text-lg"
+              className="text-secondary-text font-medium text-sm"
               htmlFor="cc-name"
             >Nome no cartão</label>
             <input
@@ -101,7 +119,7 @@ export function AddCreditCard() {
 
             <div className="w-2/5 flex flex-col gap-4">
               <label
-                className="text-secondary-text font-medium text-lg"
+                className="text-secondary-text font-medium text-sm"
                 htmlFor="cc-date"
               >Expira em:</label>
               <input
@@ -116,7 +134,7 @@ export function AddCreditCard() {
 
             <div className="w-2/6 flex flex-col gap-2">
               <label
-                className="text-secondary-text font-medium text-lg"
+                className="text-secondary-text font-medium text-sm"
                 htmlFor="cc-limit"
               >Valor do limite</label>
               <input

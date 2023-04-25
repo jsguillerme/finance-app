@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type GoalProps = {
   expected_date: string;
   title: string;
-  goal_value: number;
+  goal_value: string;
   icon?: ReactNode;
 }
 
