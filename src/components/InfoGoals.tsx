@@ -8,9 +8,10 @@ import { GoalsClass } from "../helpers/Goals";
 import goalPersonal from '../assets/goal-personal.svg';
 import { GoalContext } from "../contexts/GoalContext";
 import { ModalCreateGoal } from "./Modals/CreateGoal";
+import { ModalUpdateGoal } from "./Modals/UpdateGoal";
 
 export function InfoGoals() {
-  const { openModal, modalCreateGoal } = useContext(GoalContext)
+  const { openModal, modalUpdateGoal, modalCreateGoal } = useContext(GoalContext)
   const [listGoals, setListGoals] = useState<IGoals[]>([])
 
   const populateAllGoals = async () => {
@@ -28,13 +29,15 @@ export function InfoGoals() {
       <div className="flex items-center gap-2">
         <TitleBoard title="Goals" />
         <button
-          onClick={openModal}
+          onClick={() => openModal("create")}
           className="h-5 w-5 rounded-full bg-fifth-text flex items-center justify-center hover:brightness-90 transition-all">
           <Plus color="#112A46" />
         </button>
       </div>
 
       {modalCreateGoal && <ModalCreateGoal />}
+
+      {modalUpdateGoal && <ModalUpdateGoal />}
 
       <div className="flex items-center gap-2">
         <div className="w-full flex flex-wrap items-center gap-3">

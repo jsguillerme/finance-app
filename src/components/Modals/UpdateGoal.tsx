@@ -1,10 +1,8 @@
 import { X } from "lucide-react";
 import { useGoal } from "../../hooks/useGoal";
-import { FormEvent, useState } from "react";
-import { IGoals } from "../../interface/IGoals";
-import { GoalsClass } from "../../helpers/Goals";
+import { useState } from "react";
 
-export function ModalCreateGoal() {
+export function ModalUpdateGoal() {
   const { closeModal } = useGoal();
 
   const [title, setTitle] = useState('');
@@ -12,41 +10,17 @@ export function ModalCreateGoal() {
   const [categoryGoal, setCategoryGoal] = useState('');
   const [expectedDate, setExpectedDate] = useState('');
 
-  const fnSet = [setTitle, setPredictedValue, setCategoryGoal, setExpectedDate]
-
-  async function createGoal(event: FormEvent) {
-    event.preventDefault();
-
-    if (title.trim() === '' || predictedValue.trim() === '' || categoryGoal.trim() === '' || expectedDate.trim() === '') {
-      return;
-    }
-
-    const payload: IGoals = {
-      title: title,
-      category_goal: categoryGoal,
-      completed: false,
-      expected_date: expectedDate,
-      predicted_value: predictedValue
-    }
-
-    await GoalsClass.createGoal(payload);
-    // resetar todos os states para ''
-    fnSet.map((fn) => {
-      fn('')
-    })
-    closeModal("create");
-  }
-
+  // const fnSet = [setTitle, setPredictedValue, setCategoryGoal, setExpectedDate]
 
   return (
     <div className="fixed top-0 bottom-0 right-0 left-0 bg-black/30 z-[2] shadow-lg bg-blend-overlay">
       <div className="absolute top-[25%] left-[40%] right-[25%] bg-white z-[3] w-[25%] h-[600px] shadow-2xl rounded-lg">
         <div className="w-full p-8 flex flex-col items-center justify-center">
           <div className="w-full flex items-center justify-between mb-8">
-            <h3 className="text-xl text-primary-text font-semibold">Adicionar um novo objetivo</h3>
+            <h3 className="text-xl text-primary-text font-semibold">Atualizar as informações</h3>
             <button
               className="h-6 w-6 bg-red-600/20 rounded-md flex items-center justify-center hover:brightness-150"
-              onClick={() => closeModal("create")}
+              onClick={() => closeModal("update")}
             >
               <X size={18} color="red" />
             </button>
@@ -119,14 +93,14 @@ export function ModalCreateGoal() {
 
             <div className="w-full flex justify-start gap-10 mt-6">
               <button
-                onClick={() => closeModal("create")}
+                onClick={() => closeModal("update")}
                 className="bg-zinc-400 rounded p-2 text-white hover:brightness-110 transition-all"
               >Cancelar</button>
               <button
-                onClick={createGoal}
+                onClick={() => 'jaja'}
                 className="bg-third-text rounded p-2 text-white hover:brightness-110 transition-all flex items-center gap-1"
               >
-                Adicionar
+                Atualizar
               </button>
             </div>
           </form>

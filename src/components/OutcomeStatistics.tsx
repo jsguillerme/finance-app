@@ -3,7 +3,7 @@ import { TitleBoard } from "./TitleBoard";
 
 export function OutcomeStatistics() {
   return (
-    <main className="w-full h-2/4 flex flex-col items-start p-4 gap-3">
+    <main className="w-full h-2/4 flex flex-col items-start justify-end p-4 gap-3">
       <TitleBoard title="Outcome Statistics" />
 
       <section className="w-full flex flex-col items-start gap-4">
