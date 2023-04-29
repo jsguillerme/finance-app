@@ -22,6 +22,7 @@ export function ModalCreateGoal() {
     }
 
     const payload: IGoals = {
+      id: '',
       title: title,
       category_goal: categoryGoal,
       completed: false,

@@ -8,10 +8,9 @@ import { GoalsClass } from "../helpers/Goals";
 import goalPersonal from '../assets/goal-personal.svg';
 import { GoalContext } from "../contexts/GoalContext";
 import { ModalCreateGoal } from "./Modals/CreateGoal";
-import { ModalUpdateGoal } from "./Modals/UpdateGoal";
 
 export function InfoGoals() {
-  const { openModal, modalUpdateGoal, modalCreateGoal } = useContext(GoalContext)
+  const { openModal, modalCreateGoal } = useContext(GoalContext)
   const [listGoals, setListGoals] = useState<IGoals[]>([])
 
   const populateAllGoals = async () => {
@@ -37,8 +36,6 @@ export function InfoGoals() {
 
       {modalCreateGoal && <ModalCreateGoal />}
 
-      {modalUpdateGoal && <ModalUpdateGoal />}
-
       <div className="flex items-center gap-2">
         <div className="w-full flex flex-wrap items-center gap-3">
           {listGoals.length !== 0 ? (
@@ -46,6 +43,7 @@ export function InfoGoals() {
               return (
                 <Goal
                   key={goal.id}
+                  id={goal.id}
                   title={goal.title}
                   expected_date={goal.expected_date}
                   goal_value={goal.predicted_value}
