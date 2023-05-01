@@ -13,6 +13,7 @@ export class GoalsClass {
   }
 
   static getGoal(id: string): Promise<IGoals> {
+    console.log('ID RECEBIDO: ', id)
     return new Promise((resolve, reject) => {
       axios.get(`http://localhost:9999/goal/${id}`)
         .then((res) => res.data)
@@ -25,6 +26,15 @@ export class GoalsClass {
     console.log(data)
     return new Promise((resolve, reject) => {
       axios.post('http://localhost:9999/goal', data)
+        .then((res) => res.data)
+        .then(resolve)
+        .catch(reject)
+    })
+  }
+
+  static updateGoal(data: IGoals, id: string): Promise<IGoals> {
+    return new Promise((resolve, reject) => {
+      axios.put(`http://localhost:9999/goal/${id}`, data)
         .then((res) => res.data)
         .then(resolve)
         .catch(reject)

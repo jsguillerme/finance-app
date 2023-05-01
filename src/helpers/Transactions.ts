@@ -12,7 +12,6 @@ export class TransactionClass {
   }
 
   static createTransaction(data: ITransaction) {
-    console.log(data)
     return new Promise((resolve, reject) => {
       axios.post('http://localhost:9999/transaction', data)
         .then((res) => res.data)

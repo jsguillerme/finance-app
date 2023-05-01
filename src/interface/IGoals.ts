@@ -3,6 +3,6 @@ export interface IGoals {
   title: string;
   category_goal: string;
   predicted_value: string;
-  completed: boolean;
+  completed: "completed" | "not-completed";
   expected_date: string;
 }

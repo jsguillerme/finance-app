@@ -25,7 +25,7 @@ export function ModalCreateGoal() {
       id: '',
       title: title,
       category_goal: categoryGoal,
-      completed: false,
+      completed: "not-completed",
       expected_date: expectedDate,
       predicted_value: predictedValue
     }
