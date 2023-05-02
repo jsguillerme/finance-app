@@ -30,10 +30,17 @@ export class CardCreditClass {
   }
 
   static CardUpdateNewOutcome(id: string, data: any) {
-    console.log("id: ", id);
-    console.log("data: ", data);
     return new Promise((resolve, reject) => {
-      axios.put(`http://localhost:9999/card/${id}`, data)
+      axios.put(`http://localhost:9999/card/${id}/outcome`, data)
+        .then((res) => res.data)
+        .then(resolve)
+        .catch(reject)
+    })
+  }
+
+  static CardUpdateNewIncome(id: string, data: any) {
+    return new Promise((resolve, reject) => {
+      axios.put(`http://localhost:9999/card/${id}/income`, data)
         .then((res) => res.data)
         .then(resolve)
         .catch(reject)

@@ -44,12 +44,23 @@ export function ModalCreateTransaction() {
       type_transaction: typeTransaction
     }
 
-    const payloadUpdate = {
-      new_spent: String(spentValue)
+    await TransactionClass.createTransaction(payload);
+
+    if (typeTransaction === 'outcome') {
+      const payloadUpdateOutcome = {
+        new_spent: String(spentValue)
+      }
+      await CardCreditClass.CardUpdateNewOutcome(cardCredit, payloadUpdateOutcome)
+
+    } else if (typeTransaction === 'income') {
+      const payloadUpdateIncome = {
+        new_spent: String(spentValue)
+      }
+      await CardCreditClass.CardUpdateNewIncome(cardCredit, payloadUpdateIncome)
+    } else {
+      throw new Error('Não foi possível atualizar o cartão com as novas informações! Tipo da transação está errada!')
     }
 
-    await TransactionClass.createTransaction(payload);
-    await CardCreditClass.CardUpdateNewOutcome(cardCredit, payloadUpdate)
     setEstablishmentName('');
     setSpentValue(0);
     setCategoryEstablishment('');
@@ -60,7 +71,7 @@ export function ModalCreateTransaction() {
 
   return (
     <div className="fixed top-0 bottom-0 right-0 left-0 bg-black/30 z-[2] shadow-lg bg-blend-overlay">
-      <div className="absolute top-[25%] left-[40%] right-[25%] bg-white z-[3] w-[25%] h-[600px] shadow-2xl rounded-lg">
+      <div className="absolute top-[25%] left-[40%] right-[25%] bg-white z-[3] w-[25%] h-[520px] shadow-2xl rounded-lg">
         <div className="w-full p-8 flex flex-col items-center justify-center">
           <div className="w-full flex items-center justify-between mb-8">
             <h3 className="text-xl text-primary-text font-semibold">Adicionar uma transação</h3>

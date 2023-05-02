@@ -53,6 +53,7 @@ export function HistoryTransactions() {
               return (
                 <Transaction
                   key={transaction.id}
+                  id={transaction.id}
                   establishment_name={transaction.establishment_name}
                   spent_value={transaction.spent_value}
                   category_establishment={transaction.category_establishment}

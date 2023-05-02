@@ -26,7 +26,7 @@ export function InfoGoals() {
 
   return (
     <main className="w-full h-2/4 flex flex-col items-start p-4 gap-3">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <TitleBoard title="Objetivos" />
         <button
           title="Adicionar um objetivo"

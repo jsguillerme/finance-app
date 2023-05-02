@@ -3,7 +3,7 @@ import { HistoryTransactions } from "./components/HistoryTransactions";
 import { InfoCards } from "./components/InfoCards";
 import { InfoGoals } from "./components/InfoGoals";
 import { NavMain } from "./components/NavMain";
-import { OutcomeStatistics } from "./components/OutcomeStatistics";
+// import { OutcomeStatistics } from "./components/OutcomeStatistics";
 import { CardCreditContextProvider } from "./contexts/CardCreditContext";
 import { GoalContextProvider } from "./contexts/GoalContext";
 import { TransactionContextProvider } from "./contexts/TransactionContext";
@@ -27,7 +27,7 @@ function App() {
                 </div>
                 <div className="max-[760px]:flex max-[760px]:flex-col max-[760px]:gap-20">
                   <InfoGoals />
-                  <OutcomeStatistics />
+                  {/* <OutcomeStatistics /> */}
                 </div>
               </section>
             </GoalContextProvider>

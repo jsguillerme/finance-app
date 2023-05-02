@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Trash } from "lucide-react";
 import { useGoal } from "../../hooks/useGoal";
 import { useEffect, useState } from "react";
 import { IGoals } from "../../interface/IGoals";
@@ -51,6 +51,18 @@ export function ModalUpdateGoal({ listGoal }: ModalUpdateProps) {
     closeModal("update");
   }
 
+  async function deleteGoal(id: string) {
+    if(!id) {
+      return alert("Por favor, selecione um objetio para ser deletado")
+    }
+
+    await GoalsClass.deleteGoal(id);
+    fnSet.map((fn) => {
+      fn('')
+    })
+    closeModal("update");
+  }
+
   return (
     <div className="fixed top-0 bottom-0 right-0 left-0 bg-black/30 z-[2] shadow-lg bg-blend-overlay">
       <div className="absolute top-[15%] left-[40%] right-[25%] bg-white z-[3] w-[30%] h-[660px] shadow-2xl rounded-lg">
@@ -59,9 +71,9 @@ export function ModalUpdateGoal({ listGoal }: ModalUpdateProps) {
             <h3 className="text-xl text-primary-text font-semibold">Atualize seu objetivo</h3>
             <button
               className="h-6 w-6 bg-red-600/20 rounded-md flex items-center justify-center hover:brightness-150"
-              onClick={() => closeModal("update")}
+              onClick={() => deleteGoal(goalSelected)}
             >
-              <X size={18} color="red" />
+              <Trash size={16} color="red"/>
             </button>
           </div>
           <form className="w-full flex flex-col gap-4">

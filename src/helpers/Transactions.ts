@@ -19,4 +19,13 @@ export class TransactionClass {
         .catch(reject)
     })
   }
+
+  static deleteTransactionById(id: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      axios.delete(`http://localhost:9999/transaction/${id}`)
+        .then((res) => res.data)
+        .then(resolve)
+        .catch(reject)
+    })
+  }
 }

@@ -41,7 +41,7 @@ export function ModalCreateGoal() {
 
   return (
     <div className="fixed top-0 bottom-0 right-0 left-0 bg-black/30 z-[2] shadow-lg bg-blend-overlay">
-      <div className="absolute top-[25%] left-[40%] right-[25%] bg-white z-[3] w-[25%] h-[600px] shadow-2xl rounded-lg">
+      <div className="absolute top-[25%] left-[40%] right-[25%] bg-white z-[3] w-[25%] h-[560px] shadow-2xl rounded-lg">
         <div className="w-full p-8 flex flex-col items-center justify-center">
           <div className="w-full flex items-center justify-between mb-8">
             <h3 className="text-xl text-primary-text font-semibold">Adicionar um novo objetivo</h3>
