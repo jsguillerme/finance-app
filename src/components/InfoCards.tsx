@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, CreditCard as CardCredit } from "lucide-react";
+import { ChevronLeft, ChevronRight, CreditCard as CardCredit, RefreshCcw } from "lucide-react";
 import { CreditCard } from "./CreditCard";
 import { TitleBoard } from "./TitleBoard";
 import { useContext, useEffect, useState } from "react";
@@ -98,14 +98,24 @@ export function InfoCards() {
         </div>
 
         <div className="mr-2">
-          <button
-            className="flex items-center gap-1 hover:brightness-150"
-            title="Adicionar um cartão de crédito"
-            onClick={openModal}
-          >
-            <CardCredit color="#05668d" />
-            <p className="text-primary-text font-semibold">Add</p>
-          </button>
+          <div className="flex items-center justify-center gap-2">
+            <button
+              className="flex items-center gap-1 hover:brightness-150"
+              title="Adicionar um cartão de crédito"
+              onClick={openModal}
+            >
+              <CardCredit color="#05668d" />
+              <p className="text-primary-text font-semibold">Add</p>
+            </button>
+
+            <button
+              className="flex items-center gap-1 hover:brightness-150"
+              title="Atualizar as informações do cartão de crédito"
+              onClick={populateCreditCards}
+            >
+              <RefreshCcw color="#05668d" />
+            </button>
+          </div>
         </div>
         {modalAddCreditCard && <AddCreditCard />}
       </div>

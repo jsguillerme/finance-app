@@ -1,17 +1,36 @@
 import { LineChart, Trash } from "lucide-react";
 import { ITransaction } from "../interface/ITransaction";
 import { TransactionClass } from "../helpers/Transactions";
+import { CardCreditClass } from "../helpers/CardCredit";
 
-export function Transaction({ establishment_name, category_establishment, created_at, spent_value, type_transaction, id }: ITransaction) {
+export function Transaction({ establishment_name, category_establishment, created_at, spent_value, type_transaction, id, card_credit_id }: ITransaction) {
+
   async function deleteTransactionById(id: string) {
     if (id == 'null') {
       return;
     }
 
-    if (window.confirm("Você tem certeza que deseja remover essa transação?")) {
-      await TransactionClass.deleteTransactionById(id);
+    if (!card_credit_id) {
+      return;
     }
 
+    if (window.confirm("Você tem certeza que deseja remover essa transação?")) {
+      await TransactionClass.deleteTransactionById(id);
+
+      if (type_transaction === "income") {
+        const payload = {
+          new_spent: "-" + spent_value
+        }
+
+        await CardCreditClass.CardUpdateNewIncome(card_credit_id, payload)
+      } else if (type_transaction === "outcome") {
+        const payload = {
+          new_spent: "-" + spent_value
+        }
+
+        await CardCreditClass.CardUpdateNewOutcome(card_credit_id, payload)
+      }
+    }
   }
 
   return (

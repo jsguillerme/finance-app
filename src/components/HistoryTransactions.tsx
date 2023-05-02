@@ -23,7 +23,7 @@ export function HistoryTransactions() {
 
   useEffect(() => {
     populateHistoryTransactions();
-  }, [modalCreateTransaction, modalAddCreditCard])
+  }, [modalCreateTransaction, modalAddCreditCard, historyTransactions])
 
   return (
     <main
@@ -59,6 +59,7 @@ export function HistoryTransactions() {
                   category_establishment={transaction.category_establishment}
                   created_at={transaction.created_at}
                   type_transaction={transaction.type_transaction}
+                  card_credit_id={transaction.card_credit_id}
                 />
               );
             })
